@@ -125,7 +125,7 @@ public class Model extends Observable {
         board.setViewingPerspective(side);
 
         boolean[][] merged = new boolean[board.size()][board.size()];
-        for (int r = 3; r >= 0; r--) {
+        for (int r = 2; r >= 0; r--) {
             for (int c = 0; c <= 3; c++) {
                 Tile t = board.tile(c, r);
 
