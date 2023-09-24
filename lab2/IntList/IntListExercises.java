@@ -14,6 +14,7 @@ public class IntListExercises {
             head.first += c;
             head = head.rest;
         }
+        head.first += c;
     }
 
     /**
@@ -25,15 +26,22 @@ public class IntListExercises {
      */
     public static void setToZeroIfMaxFEL(IntList L) {
         IntList p = L;
-        while (p != null) {
-            if (firstDigitEqualsLastDigit(max(p))) {
+        while (p.rest != null) {
+            int currentMax = max(p);
+            boolean firstEqualsLast = firstDigitEqualsLastDigit(currentMax);
+            if (firstEqualsLast) {
                 p.first = 0;
             }
             p = p.rest;
         }
+        if (p.rest == null) {
+            p.first = 0;
+        }
     }
 
-    /** Returns the max value in the IntList starting at L. */
+    /**
+     * Returns the max value in the IntList starting at L.
+     */
     public static int max(IntList L) {
         int max = L.first;
         IntList p = L.rest;
@@ -46,17 +54,23 @@ public class IntListExercises {
         return max;
     }
 
-    /** Returns true if the last digit of x is equal to
-     *  the first digit of x.
+    /**
+     * Returns true if the last digit of x is equal to
+     * the first digit of x.
      */
     public static boolean firstDigitEqualsLastDigit(int x) {
-        int lastDigit = x % 10;
-        while (x > 10) {
-            x = x / 10;
+        int Lastdigit = x % 10;
+        int Firstdigit = x / 10;
+        while (Firstdigit > 10) {
+            Firstdigit = Firstdigit / 10;
         }
-        int firstDigit = x % 10;
-        return firstDigit == lastDigit;
+        if (Lastdigit != 0) {
+            return Lastdigit == Firstdigit;
+        }
+        return false;
+
     }
+
 
     /**
      * Part C: (Buggy) mutative method that squares each prime
@@ -68,15 +82,15 @@ public class IntListExercises {
     public static boolean squarePrimes(IntList lst) {
         // Base Case: we have reached the end of the list
         if (lst == null) {
-            return false;
+            return false; // Return false when the list is empty or null
         }
-
         boolean currElemIsPrime = Primes.isPrime(lst.first);
-
+        // Recursive case: Process the rest of the list and return the result
+        boolean restIsPrime = squarePrimes(lst.rest);
         if (currElemIsPrime) {
             lst.first *= lst.first;
         }
-
-        return currElemIsPrime || squarePrimes(lst.rest);
+        return currElemIsPrime || restIsPrime; // Return true if either the current element is prime or the rest of the list contains prime numbers
     }
 }
+

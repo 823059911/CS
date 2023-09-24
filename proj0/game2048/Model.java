@@ -129,7 +129,7 @@ public class Model extends Observable {
             for (int c = 0; c <= 3; c++) {
                 Tile t = board.tile(c, r);
 
-                if (t != null) {
+                if   (t != null) {
                     // 处理当前tile：判断是否需要move，需要move到哪里，是否merge？
                     // 向上移动，c不变，r加一
                     int dc = c, dr = r + 1;
