@@ -84,6 +84,7 @@ public class IntListExercises {
         if (lst == null) {
             return false; // Return false when the list is empty or null
         }
+        //**以下两种情况中的任意一种都可以return*//
         boolean currElemIsPrime = Primes.isPrime(lst.first);
         // Recursive case: Process the rest of the list and return the result
         boolean restIsPrime = squarePrimes(lst.rest);
